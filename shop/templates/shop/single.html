@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single</title>
+    <title>Product {{ data.id }}</title>
 </head>
 <body>
-    {{ data.text }}<br/>
+    {{ data.description }}<br/>
+    {{ data.price }}<br/>
+    {{ data.quantity }}<br/>
 
-    <a href="/first_app/{{ data.id }}/update">Update</a>
-    <a href="/first_app/{{ data.id }}/delete">Delete</a>
-    <a href="/first_app">Cancel</a>
+    <a href="/shop/{{ data.id }}/update">Update</a>
+    <a href="/shop">Cancel</a>
 </body>
 </html>

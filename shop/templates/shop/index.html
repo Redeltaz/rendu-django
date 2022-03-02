@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Shop</title>
 </head>
 <body>
-    {% for question in question_list %}
+    {% for product in product_list %}
 
-        {{ question.text }}
-        <a href="first_app/{{ question.id }}">See more</a>
+        {{ product.price }}
+        {{ product.quantity }}
+        <a href="/shop/{{ product.id }}">Purchase</a>
         <br>
         <br>
     {% endfor %}
 
-    <a href="first_app/create">Create New Question</a>
+    <a href="/shop/create">Create New Product</a>
 </body>
 </html>
