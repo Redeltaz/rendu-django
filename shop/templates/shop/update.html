@@ -6,15 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update</title>
 </head>
+<style>
+
+    body {
+        display: flex;
+        justify-content: center;
+        margin-top: 200px;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        background-color: rgb(224, 224, 224);
+        border-radius: 10px;
+        width: 50%;
+        padding: 20px 0;
+    }
+
+    input {
+        margin: 10px 0;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 5px;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+
+    .cancel {
+        background-color: rgb(145, 17, 17);
+    }
+</style>
 <body>
     <form method="POST">
         {% csrf_token %}
+        <div>
+            {{ form.as_p }}
+        </div>
 
-        {{ form.as_p }}
-
-        <input type="submit" value="Update">
+        <input type="submit" value="Update" class="update">
+        <a href="/shop" class="cancel">Cancel</a>
     </form>
-
-    <a href="/shop">Cancel</a>
 </body>
 </html>

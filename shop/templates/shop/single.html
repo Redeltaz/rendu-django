@@ -6,12 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product {{ data.id }}</title>
 </head>
-<body>
-    {{ data.description }}<br/>
-    {{ data.price }}<br/>
-    {{ data.quantity }}<br/>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+    }
 
-    <a href="/shop/{{ data.id }}/update">Update</a>
-    <a href="/shop">Cancel</a>
+    .main {
+        width: 60%;
+        background-color: rgb(219, 219, 219);
+        border: 1px solid black;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    img {
+        width: 400px;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 5px;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+
+    .update {
+        background-color: rgb(226, 154, 19);
+    }
+
+    .cancel {
+        background-color: rgb(145, 17, 17);
+    }
+</style>
+<body>
+    <div class="main">
+        <img src="{{data.image}}" alt="">
+        <p>{{ data.description }} </p><br>
+        <p>Price : {{ data.price }}$</p><br>
+        <p>Quantity : {{ data.quantity }} </p><br>
+
+        <form action="/shop/{{ data.id }}/buy" method="POST">
+            {% csrf_token %}
+
+            <label for="pet-select">Buy : </label>
+
+            <select name="quantity">
+                <option value="">--Choose Quantity--</option>
+                    {% for k in quantity %}
+                        <option value="{{k}}">{{k}}</option>
+                    {% endfor %}
+            </select>
+
+            <input type="submit" value="Buy">
+        </form>
+
+        <a href="/shop/{{ data.id }}/update" class="update">Update</a>
+        <a href="/shop" class="cancel">Cancel</a>
+    </div>
 </body>
 </html>
