@@ -44,10 +44,16 @@
         width: 100%;
         text-align: center;
     }
+    
+    .chat {
+        background-color: white;
+        border: 1px solid black;
+        color: black;
+    }
 </style>
 <body>
+    <a href="/chat" class="chat">Go to chat</a> 
     <div class="main">
-        
         {% for product in product_list %}
             {% if product.quantity != 0 %}
             <div class="item">

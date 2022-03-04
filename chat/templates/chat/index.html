@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
+    <title>Chat</title>
+</head>
+<style>
+    a {
+        color: black;
+        border: 1px solid black;
+        text-decoration: none;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    li {
+        list-style-type: "- ";
+    }
+
+    form {
+        display: flex;
+    }
+
+    input[type=submit] {
+        background-color: rgb(6, 102, 6);
+        color: white;
+        text-decoration: none;
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        margin-left: 20px;
+        cursor: pointer;
+        width: 80px;
+    }
+</style>
+<body>
+    <a href="/shop">Go to Shop</a>
+    <div class="main">
+        <h1>Send a message to your friend !</h1>
+        <form>
+            {% csrf_token %}
+
+            <div class="inputs">
+                {{ form.as_p }}
+            </div>
+
+            <input type="submit" value="send">
+        </form>
+
+        <ul>
+        {% for message in message_list %}
+            <li>{{ message.content }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</body>
+<script>
+    const socket = io.connect();
+
+    const form = document.querySelector("form")
+    const input = document.querySelector(".chat-input")
+    const chatList = document.querySelector("ul")
+
+    socket.on("get_new_chat", (message) => {
+        const { data } = message  
+
+        const li = document.createElement("li")
+        li.innerText = data
+        chatList.appendChild(li)
+    })
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault()
+        content = input.value
+
+        socket.emit("new_chat", {data: content})
+
+        input.value = ""
+    })
+</script>
+</html>
